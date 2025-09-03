@@ -17,13 +17,17 @@ body {
   text-align: center;
   background-color: var(--background-color);
   margin: 0;
-  padding: 30px;
+  padding: 20px;
   color: var(--text-color);
   background-image: linear-gradient(
     45deg,
     rgba(255, 195, 113, 0.1),
     rgba(64, 196, 255, 0.1)
   );
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Ensure home button positioning works */
 }
 
 h1 {
@@ -33,11 +37,11 @@ h1 {
     var(--secondary-color)
   );
   color: white;
-  padding: 30px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  margin-bottom: 30px;
-  font-size: 3rem;
+  margin: 20px auto;
+  font-size: 2.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   transform: rotate(-2deg); /* Slight tilt for playfulness */
   transition: var(--transition);
@@ -69,6 +73,37 @@ img {
 
 img:hover {
   transform: scale(1.1) rotate(5deg); /* Playful scaling and rotation */
+}
+
+.nav-image {
+  width: 100%;
+  max-width: 250px; /* Adjusted for balanced sizing */
+  height: auto;
+  border-radius: 20px;
+  border: 4px solid var(--accent-color);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-image:hover {
+  transform: scale(1.15) rotate(5deg); /* Enhanced hover effect for image buttons */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nav-title {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-top: 5px; /* Reduced margin to sit closer to image */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.nav-item:hover .nav-title {
+  color: var(--accent-color);
+  transform: scale(1.1); /* Slight scale for playful effect */
 }
 
 button {
@@ -109,6 +144,18 @@ button:focus {
   outline-offset: 3px;
 }
 
+.home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none; /* Remove underline from link */
+}
+
+.home-button button {
+  padding: 10px 20px; /* Slightly smaller for top-left placement */
+  font-size: 1.2rem;
+}
+
 .navigation {
   display: flex;
   justify-content: center;
@@ -119,30 +166,33 @@ button:focus {
 
 nav {
   display: flex;
+  justify-content: space-evenly; /* Even spacing between buttons */
+  align-items: center;
+  gap: 20px; /* Consistent gap between buttons */
+  margin: 20px 0;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  width: 100%; /* Ensure nav takes full width */
+}
+
+.nav-item {
+  flex: 1 1 30%; /* Equal flex basis for even distribution */
+  min-width: 150px; /* Minimum width for smaller screens */
+  max-width: 300px; /* Maximum width for each button */
+  display: flex;
+  flex-direction: column; /* Ensure titles stack below images */
   justify-content: center;
-  gap: 25px;
-  margin: 30px 0;
+  align-items: center;
 }
 
 nav a {
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: var(--primary-color);
-  padding: 12px 24px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  font-family: "Bubblegum Sans", "Comic Sans MS", "Arial", sans-serif;
+  text-decoration: none; /* Remove underline from image links */
+  display: block;
+  width: 100%;
 }
 
-nav a:hover {
-  background: var(--accent-color);
-  color: white;
-  transform: scale(1.1) rotate(3deg); /* Playful hover effect */
-}
-
-nav a:focus {
+nav a:focus .nav-image,
+nav a:focus .nav-title {
   outline: 4px solid var(--accent-color);
   outline-offset: 3px;
 }
@@ -150,8 +200,8 @@ nav a:focus {
 /* Responsive Design */
 @media (max-width: 600px) {
   h1 {
-    font-size: 2.2rem;
-    padding: 20px;
+    font-size: 2rem;
+    padding: 15px;
     transform: rotate(0); /* Remove tilt on small screens */
   }
 
@@ -164,16 +214,35 @@ nav a:focus {
     font-size: 1.2rem;
   }
 
-  nav a {
-    font-size: 1.2rem;
-    padding: 10px 20px;
+  .home-button {
+    top: 10px;
+    left: 10px;
+  }
+
+  .home-button button {
+    padding: 8px 16px;
+    font-size: 1rem;
   }
 
   img {
     max-width: 220px;
   }
 
-  .content {
-    padding: 15px;
+  .nav-image {
+    max-width: 180px; /* Smaller size for mobile */
+  }
+
+  .nav-title {
+    font-size: 1.1rem;
+    margin-top: 3px; /* Even closer on mobile */
+  }
+
+  .nav-item {
+    flex: 1 1 100%; /* Stack vertically on small screens */
+    max-width: 200px;
+  }
+
+  nav {
+    gap: 15px; /* Slightly smaller gap for mobile */
   }
 }
